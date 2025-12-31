@@ -11,9 +11,9 @@ markdown: kramdown
 plugins:
   - jekyll-seo-tag
 
-# SEO Configuration
-url: "https://mementomoriCarpediem.github.io"
-baseurl: "/prepaid-landing"
+# SEO Configuration - Custom Domain
+url: "https://prepaid-for-good.store"
+baseurl: ""
 
 # Social Media
 twitter:
@@ -32,4 +32,4 @@ exclude:
   - LICENSE
   - Gemfile
   - Gemfile.lock
-
+  - CNAME

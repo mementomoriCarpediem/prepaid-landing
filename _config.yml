@@ -1,0 +1,35 @@
+# Jekyll Configuration for 선(한) 결제 Landing Page
+title: "선(한) 결제"
+description: "투명하고 따뜻한 선결제 기부 문화를 만들어갑니다"
+lang: ko
+
+# Theme
+theme: minima
+markdown: kramdown
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# SEO Configuration
+url: "https://mementomoriCarpediem.github.io"
+baseurl: "/prepaid-landing"
+
+# Social Media
+twitter:
+  card: summary_large_image
+
+# Default Front Matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Exclude files from build
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+

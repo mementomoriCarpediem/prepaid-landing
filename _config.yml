@@ -10,14 +10,23 @@ markdown: kramdown
 # Plugins
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # SEO Configuration - Custom Domain
 url: "https://prepaid-for-good.store"
 baseurl: ""
 
+# Open Graph / Social
+og_image: /images/og-image.png
+logo: /images/logo.png
+
 # Social Media
 twitter:
   card: summary_large_image
+
+# Additional SEO
+author: 공명
+google_site_verification: "18xig2rlKT4fAyK1f_SrhpNQBwlWDnCdinqSguuKOeQ" # Google Search Console 인증 코드 추가
 
 # Default Front Matter
 defaults:

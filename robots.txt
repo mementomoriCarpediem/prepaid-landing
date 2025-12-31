@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prepaid-for-good.store/sitemap.xml
+

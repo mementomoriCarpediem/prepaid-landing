@@ -23,7 +23,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-브라우저에서 `http://localhost:4000/prepaid-landing/` 접속
+브라우저에서 `http://localhost:4000` 접속
 
 ## 배포
 

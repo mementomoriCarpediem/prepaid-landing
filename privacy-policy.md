@@ -332,4 +332,4 @@ Google AdMob의 개인정보 처리에 관한 자세한 내용은 [Google 개인
 | -------------- | --------------------------------------------------------------- |
 | 상호           | 공명                                                            |
 | 사업자등록번호 | 520-22-02348                                                    |
-| 문의           | 앱 내 고객문의 이용 또는 이메일(resonance.zorba@gmail.com) 문의 |
+| 문의           | 앱 내 고객문의 이용 또는 이메일([resonance.zorba@gmail.com](mailto:resonance.zorba@gmail.com)) 문의 |

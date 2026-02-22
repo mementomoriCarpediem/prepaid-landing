@@ -28,6 +28,9 @@ twitter:
 author: 공명
 google_site_verification: "18xig2rlKT4fAyK1f_SrhpNQBwlWDnCdinqSguuKOeQ" # Google Search Console 인증 코드 추가
 
+# Google Analytics 4
+google_analytics: "G-RYWLJR05VB"
+
 # Default Front Matter
 defaults:
   - scope:

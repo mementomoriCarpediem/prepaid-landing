@@ -9,6 +9,30 @@
       content="{{ page.description | default: site.description }}"
     />
 
+    <!-- Google Analytics 4 -->
+    {% if site.google_analytics and jekyll.environment == 'production' or
+    site.google_analytics %}
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "{{ site.google_analytics }}", {
+        page_title: "{{ page.title | default: site.title }}",
+        page_path: "{{ page.url }}",
+        custom_map: {
+          dimension1: "user_type",
+          dimension2: "content_section",
+        },
+      });
+    </script>
+    {% endif %}
+
     <!-- SEO -->
     {% seo %}
 
@@ -826,5 +850,195 @@
         </p>
       </div>
     </footer>
+
+    {% if site.google_analytics %}
+    <script>
+      (function () {
+        "use strict";
+        if (typeof gtag !== "function") return;
+
+        // 1. App Download Click Tracking (리드 전환 추적)
+        document.querySelectorAll("a.app-button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var href = this.href || "";
+            var platform = href.includes("apple.com") ? "ios" : "android";
+            var section = getClosestSection(this);
+
+            gtag("event", "app_download_click", {
+              event_category: "conversion",
+              event_label: platform,
+              platform: platform,
+              link_url: href,
+              click_location: section,
+            });
+          });
+        });
+
+        // 2. Navigation Click Tracking
+        document.querySelectorAll(".site-nav a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            gtag("event", "nav_click", {
+              event_category: "navigation",
+              event_label: this.textContent.trim(),
+              link_url: this.href || this.getAttribute("href"),
+            });
+          });
+        });
+
+        // 3. External Link Click Tracking (참고 자료 등)
+        document
+          .querySelectorAll('a[target="_blank"]')
+          .forEach(function (link) {
+            if (link.classList.contains("app-button")) return;
+            link.addEventListener("click", function () {
+              gtag("event", "outbound_click", {
+                event_category: "outbound",
+                event_label: this.textContent.trim(),
+                link_url: this.href,
+              });
+            });
+          });
+
+        // 4. Footer Link Click Tracking
+        document.querySelectorAll(".footer-links a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            gtag("event", "footer_link_click", {
+              event_category: "navigation",
+              event_label: this.textContent.trim(),
+              link_url: this.href,
+            });
+          });
+        });
+
+        // 5. Section Visibility Tracking (스크롤 기반 섹션 도달 추적)
+        var trackedSections = {};
+        var sectionIds = ["hero", "background", "problem", "solution", "usage"];
+
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var id =
+                  entry.target.id || entry.target.getAttribute("data-section");
+                if (!id || trackedSections[id]) return;
+                trackedSections[id] = true;
+
+                gtag("event", "section_view", {
+                  event_category: "engagement",
+                  event_label: id,
+                  content_section: id,
+                });
+              });
+            },
+            { threshold: 0.3 }
+          );
+
+          sectionIds.forEach(function (id) {
+            var el =
+              document.getElementById(id) ||
+              document.querySelector('[data-section="' + id + '"]');
+            if (el) observer.observe(el);
+          });
+        }
+
+        // 6. Scroll Depth Tracking (25%, 50%, 75%, 100%)
+        var scrollThresholds = [25, 50, 75, 100];
+        var scrollTracked = {};
+
+        window.addEventListener(
+          "scroll",
+          throttle(function () {
+            var scrollTop =
+              window.pageYOffset || document.documentElement.scrollTop;
+            var docHeight =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            if (docHeight <= 0) return;
+            var scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+            scrollThresholds.forEach(function (threshold) {
+              if (scrollPercent >= threshold && !scrollTracked[threshold]) {
+                scrollTracked[threshold] = true;
+                gtag("event", "scroll_depth", {
+                  event_category: "engagement",
+                  event_label: threshold + "%",
+                  value: threshold,
+                });
+              }
+            });
+          }, 200)
+        );
+
+        // 7. Time on Page Tracking (30s, 60s, 120s, 300s)
+        var timeThresholds = [30, 60, 120, 300];
+        timeThresholds.forEach(function (seconds) {
+          setTimeout(function () {
+            gtag("event", "time_on_page", {
+              event_category: "engagement",
+              event_label: seconds + "s",
+              value: seconds,
+            });
+          }, seconds * 1000);
+        });
+
+        // 8. "더 알아보기" Scroll Hint Click
+        var scrollHint = document.querySelector(".scroll-hint");
+        if (scrollHint) {
+          scrollHint.addEventListener("click", function () {
+            gtag("event", "scroll_hint_click", {
+              event_category: "engagement",
+              event_label: "learn_more",
+            });
+          });
+        }
+
+        // 9. Email Link Click Tracking (문의 리드)
+        document
+          .querySelectorAll('a[href^="mailto:"]')
+          .forEach(function (link) {
+            link.addEventListener("click", function () {
+              gtag("event", "contact_click", {
+                event_category: "conversion",
+                event_label: "email",
+                contact_method: "email",
+              });
+            });
+          });
+
+        // Utility: closest section ID
+        function getClosestSection(el) {
+          while (el && el !== document.body) {
+            if (el.id) return el.id;
+            if (el.classList && el.classList.contains("hero-section"))
+              return "hero";
+            if (el.classList && el.classList.contains("usage-section"))
+              return "usage";
+            if (el.classList && el.classList.contains("section-cta")) {
+              var prev = el.previousElementSibling;
+              while (prev) {
+                if (prev.id) return prev.id;
+                prev = prev.previousElementSibling;
+              }
+            }
+            el = el.parentElement;
+          }
+          return "unknown";
+        }
+
+        // Utility: throttle
+        function throttle(fn, wait) {
+          var last = 0;
+          return function () {
+            var now = Date.now();
+            if (now - last >= wait) {
+              last = now;
+              fn.apply(this, arguments);
+            }
+          };
+        }
+      })();
+    </script>
+    {% endif %}
   </body>
 </html>

@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "Z77KPA52VB.com.resonancezorba.prepaid",
+        "paths": [
+          "/invite/*"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.resonancezorba.prepaid",
+      "sha256_cert_fingerprints": [
+        "AC:83:D0:69:80:97:2F:00:D7:5A:D1:5D:03:85:51:AE:01:13:81:13:B4:78:7F:FF:23:E2:3E:0F:F6:BB:53:66",
+        "B1:AF:62:DC:AC:AE:F3:CA:AA:C3:18:F5:42:46:D9:6A:EA:95:CE:32:B3:D4:E1:58:41:03:00:85:5A:0A:14:62"
+      ]
+    }
+  }
+]

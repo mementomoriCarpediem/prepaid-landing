@@ -1,0 +1,626 @@
+---
+layout: null
+permalink: /invite/
+---
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선(한) 결제 - 점주 초대</title>
+    <meta name="description" content="선(한) 결제 앱에서 매장을 등록하고 선결제를 받아보세요." />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="선(한) 결제 - 점주 초대" />
+    <meta property="og:description" content="선(한) 결제 앱에서 매장을 등록하고 선결제를 받아보세요." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://prepaid-for-good.store/invite/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-primary: #b8951e;
+        --color-primary-light: #d4af37;
+        --color-primary-dark: #8b6914;
+        --color-text: #2c2a27;
+        --color-text-muted: #5c5a57;
+        --color-text-light: #7a7875;
+        --color-bg: #faf9f7;
+        --color-bg-alt: #f5f3ef;
+        --color-surface: #ffffff;
+        --color-border: #e8e6e3;
+        --color-border-light: #f0eeeb;
+        --color-success: #4a7c59;
+        --color-accent: #8b6914;
+        --font-display: "Gowun Batang", "Noto Serif KR", serif;
+        --font-body: "Noto Sans KR", "Pretendard", -apple-system, sans-serif;
+        --max-width: 480px;
+        --spacing-xs: 0.375rem;
+        --spacing-sm: 0.75rem;
+        --spacing-md: 1.25rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3.5rem;
+        --radius: 8px;
+        --radius-sm: 6px;
+        --shadow-soft: 0 2px 12px rgba(44, 42, 39, 0.06);
+        --shadow-elevated: 0 8px 32px rgba(44, 42, 39, 0.08);
+        --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.8;
+        color: var(--color-text);
+        background-color: var(--color-bg);
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(
+            ellipse 80% 50% at 50% -20%,
+            rgba(184, 149, 30, 0.08),
+            transparent
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 100% 100%,
+            rgba(184, 149, 30, 0.04),
+            transparent
+          );
+      }
+
+      /* Header */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(250, 249, 247, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border-light);
+        padding: var(--spacing-md) var(--spacing-lg);
+      }
+
+      .site-header-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-logo {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--color-text);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        transition: color 0.25s var(--ease-out);
+      }
+
+      .site-logo span {
+        color: var(--color-primary-dark);
+      }
+
+      .site-logo:hover {
+        color: var(--color-primary-dark);
+        text-decoration: none;
+      }
+
+      /* Main Content */
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      /* App Icon */
+      .app-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 18px;
+        box-shadow: var(--shadow-elevated);
+        margin-bottom: var(--spacing-lg);
+        animation: fadeInUp 0.6s var(--ease-out) both;
+      }
+
+      /* Invite Card */
+      .invite-card {
+        background: var(--color-surface);
+        border-radius: var(--radius);
+        padding: var(--spacing-lg);
+        box-shadow: var(--shadow-elevated);
+        border: 1px solid var(--color-border-light);
+        width: 100%;
+        animation: fadeInUp 0.6s var(--ease-out) 0.1s both;
+      }
+
+      .invite-title {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: var(--spacing-sm);
+        letter-spacing: -0.02em;
+        line-height: 1.4;
+      }
+
+      .invite-description {
+        font-size: 0.9375rem;
+        color: var(--color-text-muted);
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.75;
+        max-width: none;
+      }
+
+      /* Status Messages */
+      .status-message {
+        display: none;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-sm);
+        font-size: 0.875rem;
+        margin-bottom: var(--spacing-md);
+        line-height: 1.6;
+      }
+
+      .status-message.opening {
+        display: block;
+        background: rgba(74, 124, 89, 0.08);
+        color: var(--color-success);
+        border: 1px solid rgba(74, 124, 89, 0.15);
+      }
+
+      .status-message.redirecting {
+        display: block;
+        background: rgba(184, 149, 30, 0.08);
+        color: var(--color-primary-dark);
+        border: 1px solid rgba(184, 149, 30, 0.15);
+      }
+
+      /* Buttons */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+        width: 100%;
+        padding: var(--spacing-md) var(--spacing-lg);
+        background: var(--color-text);
+        color: var(--color-bg);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.25s var(--ease-out),
+          transform 0.2s var(--ease-out);
+      }
+
+      .btn-primary:hover {
+        background: var(--color-primary-dark);
+        transform: translateY(-1px);
+        text-decoration: none;
+        color: var(--color-bg);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: transparent;
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: border-color 0.25s var(--ease-out),
+          color 0.25s var(--ease-out);
+        margin-top: var(--spacing-sm);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--color-primary-light);
+        color: var(--color-primary-dark);
+        text-decoration: none;
+      }
+
+      /* Store Buttons for Desktop */
+      .store-buttons {
+        display: flex;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+      }
+
+      .store-buttons a {
+        flex: 1;
+      }
+
+      .store-buttons .btn-primary {
+        font-size: 0.9375rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+      }
+
+      /* Divider */
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-md) 0;
+        color: var(--color-text-light);
+        font-size: 0.8125rem;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--color-border-light);
+      }
+
+      /* Spinner */
+      .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(74, 124, 89, 0.3);
+        border-top-color: var(--color-success);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        vertical-align: middle;
+        margin-right: 6px;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* Desktop Section */
+      .desktop-section {
+        margin-top: var(--spacing-md);
+      }
+
+      .desktop-description {
+        font-size: 0.875rem;
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+        line-height: 1.7;
+      }
+
+      /* Footer */
+      .site-footer {
+        background: var(--color-bg-alt);
+        border-top: 1px solid var(--color-border-light);
+        padding: var(--spacing-lg) var(--spacing-lg);
+        text-align: center;
+      }
+
+      .site-footer-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: var(--spacing-xs);
+        color: var(--color-text);
+      }
+
+      .footer-logo span {
+        color: var(--color-primary-dark);
+      }
+
+      .copyright {
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Hidden utility */
+      .hidden {
+        display: none !important;
+      }
+
+      /* Responsive */
+      @media (max-width: 640px) {
+        .content-wrapper {
+          padding: var(--spacing-lg) var(--spacing-md);
+        }
+
+        .invite-title {
+          font-size: 1.25rem;
+        }
+
+        .store-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="https://prepaid-for-good.store" class="site-logo">
+          선<span>(한)</span> 결제
+        </a>
+      </div>
+    </header>
+
+    <main class="content-wrapper">
+      <img
+        src="/images/logo.png"
+        alt="선(한) 결제 앱 아이콘"
+        class="app-icon"
+      />
+
+      <!-- Mobile: App Installed (trying to open) -->
+      <div id="view-opening" class="invite-card hidden">
+        <h1 class="invite-title">앱을 여는 중...</h1>
+        <div class="status-message opening">
+          <span class="spinner"></span>
+          선(한) 결제 앱으로 이동합니다
+        </div>
+        <p class="invite-description">
+          잠시만 기다려 주세요. 앱이 열리지 않는다면 아래 버튼을 눌러 설치해 주세요.
+        </p>
+        <a id="btn-store-fallback" href="#" class="btn-secondary">
+          앱 설치하러 가기
+        </a>
+      </div>
+
+      <!-- Mobile: App Not Installed (redirect to store) -->
+      <div id="view-store" class="invite-card hidden">
+        <h1 class="invite-title">선(한) 결제 앱이 필요합니다</h1>
+        <div class="status-message redirecting">
+          스토어로 이동합니다...
+        </div>
+        <p class="invite-description">
+          앱을 설치한 후 이 링크를 다시 열어주세요.
+        </p>
+        <a id="btn-store-direct" href="#" class="btn-primary">
+          앱 설치하기
+        </a>
+      </div>
+
+      <!-- Desktop -->
+      <div id="view-desktop" class="invite-card hidden">
+        <h1 class="invite-title">선(한) 결제에 초대되었습니다</h1>
+        <p class="invite-description">
+          이 링크는 모바일에서 열어주세요.<br />
+          아래에서 앱을 설치하신 후, 모바일 브라우저에서 이 링크를 다시 열어주시면 됩니다.
+        </p>
+        <div class="desktop-section">
+          <p class="desktop-description">
+            앱을 설치하세요
+          </p>
+          <div class="store-buttons">
+            <a
+              href="https://apps.apple.com/kr/app/%EC%84%A0%ED%95%9C%EA%B2%B0%EC%A0%9C/id6741199744"
+              class="btn-primary"
+              target="_blank"
+              rel="noopener"
+            >
+              iOS (App Store)
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.resonancezorba.prepaid"
+              class="btn-primary"
+              target="_blank"
+              rel="noopener"
+            >
+              Android (Play Store)
+            </a>
+          </div>
+        </div>
+        <div class="divider">또는</div>
+        <a href="https://prepaid-for-good.store" class="btn-secondary">
+          선(한) 결제 소개 보기
+        </a>
+      </div>
+
+      <!-- Error: No ID -->
+      <div id="view-error" class="invite-card hidden">
+        <h1 class="invite-title">잘못된 초대 링크입니다</h1>
+        <p class="invite-description">
+          유효하지 않은 링크입니다. 초대 링크를 다시 확인해 주세요.
+        </p>
+        <a href="https://prepaid-for-good.store" class="btn-secondary">
+          선(한) 결제 홈으로
+        </a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="footer-logo">선<span>(한)</span> 결제</div>
+        <p class="copyright">
+          &copy; 2026 공명 | 사업자등록번호: 520-22-02348
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+
+        // --- Configuration ---
+        var APP_SCHEME = "prepaid://prepaid/";
+        var IOS_STORE =
+          "https://apps.apple.com/kr/app/%EC%84%A0%ED%95%9C%EA%B2%B0%EC%A0%9C/id6741199744";
+        var ANDROID_STORE =
+          "https://play.google.com/store/apps/details?id=com.resonancezorba.prepaid";
+        var FALLBACK_TIMEOUT = 2500;
+
+        // --- Extract prepaid ID from URL ---
+        var params = new URLSearchParams(window.location.search);
+        var prepaidId = params.get("id");
+
+        // --- Detect OS ---
+        var ua = navigator.userAgent || navigator.vendor || window.opera;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        var isAndroid = /android/i.test(ua);
+        var isMobile = isIOS || isAndroid;
+
+        // --- DOM references ---
+        var viewOpening = document.getElementById("view-opening");
+        var viewStore = document.getElementById("view-store");
+        var viewDesktop = document.getElementById("view-desktop");
+        var viewError = document.getElementById("view-error");
+        var btnStoreFallback = document.getElementById("btn-store-fallback");
+        var btnStoreDirect = document.getElementById("btn-store-direct");
+
+        // --- Helper: get store URL for current platform ---
+        function getStoreUrl() {
+          return isIOS ? IOS_STORE : ANDROID_STORE;
+        }
+
+        // --- Helper: show a single view ---
+        function showView(view) {
+          [viewOpening, viewStore, viewDesktop, viewError].forEach(function (v) {
+            v.classList.add("hidden");
+          });
+          view.classList.remove("hidden");
+        }
+
+        // --- No ID provided ---
+        if (!prepaidId) {
+          showView(viewError);
+          return;
+        }
+
+        // --- Desktop ---
+        if (!isMobile) {
+          showView(viewDesktop);
+          return;
+        }
+
+        // --- Mobile: Try to open app ---
+        var deepLink = APP_SCHEME + encodeURIComponent(prepaidId);
+        var storeUrl = getStoreUrl();
+
+        // Set store links on fallback buttons
+        btnStoreFallback.href = storeUrl;
+        btnStoreDirect.href = storeUrl;
+
+        // Show "opening" view
+        showView(viewOpening);
+
+        // Track if user left the page (app opened successfully)
+        var pageHidden = false;
+
+        function onVisibilityChange() {
+          if (document.hidden || document.webkitHidden) {
+            pageHidden = true;
+          }
+        }
+
+        document.addEventListener("visibilitychange", onVisibilityChange);
+        document.addEventListener("webkitvisibilitychange", onVisibilityChange);
+
+        // Also detect blur (some browsers fire this instead)
+        window.addEventListener("blur", function () {
+          pageHidden = true;
+        });
+
+        // Attempt to open the app via custom scheme
+        var start = Date.now();
+
+        // Use an iframe for iOS to avoid navigation issues
+        if (isIOS) {
+          var iframe = document.createElement("iframe");
+          iframe.style.display = "none";
+          iframe.src = deepLink;
+          document.body.appendChild(iframe);
+
+          setTimeout(function () {
+            document.body.removeChild(iframe);
+          }, 100);
+        } else {
+          // Android: use window.location
+          window.location.href = deepLink;
+        }
+
+        // Fallback: if the app didn't open, redirect to store
+        setTimeout(function () {
+          // If user left page, app opened successfully
+          if (pageHidden) {
+            return;
+          }
+
+          // Check if enough time passed (app would have opened quickly)
+          var elapsed = Date.now() - start;
+          if (elapsed < FALLBACK_TIMEOUT + 500) {
+            showView(viewStore);
+            // Auto-redirect to store after a brief moment
+            setTimeout(function () {
+              if (!pageHidden) {
+                window.location.href = storeUrl;
+              }
+            }, 800);
+          }
+        }, FALLBACK_TIMEOUT);
+      })();
+    </script>
+  </body>
+</html>

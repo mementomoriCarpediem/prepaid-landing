@@ -38,6 +38,10 @@ defaults:
     values:
       layout: default
 
+# Include dotfile directories
+include:
+  - .well-known
+
 # Exclude files from build
 exclude:
   - README.md

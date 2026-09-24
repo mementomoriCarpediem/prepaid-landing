@@ -21,6 +21,23 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+      // 통계 거부: ?analytics=off|internal 방문·측정 중단/내부 방문 쿠키·DNT·GPC 브라우저는 수집하지 않는다.
+      // 구글 공식 비활성 플래그(window['ga-disable-<ID>'])를 쓰므로 아래 이벤트 추적도 함께 멈춘다.
+      (function () {
+        var c = document.cookie,
+          q = new URLSearchParams(location.search).get("analytics"),
+          has = function (n) {
+            return new RegExp("(?:^|;\\s*)" + n + "=1(?:;|$)").test(c);
+          };
+        if (q === "off" || q === "internal")
+          document.cookie = "orbit_" + q + "=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure";
+        if (q === "external")
+          document.cookie = "orbit_internal=; Path=/; Max-Age=0; SameSite=Lax; Secure";
+        window["ga-disable-{{ site.google_analytics }}"] =
+          q === "off" || q === "internal" || has("orbit_off") ||
+          (has("orbit_internal") && q !== "external") ||
+          navigator.doNotTrack === "1" || navigator.globalPrivacyControl === true;
+      })();
       gtag("js", new Date());
       gtag("config", "{{ site.google_analytics }}", {
         page_title: "{{ page.title | default: site.title }}",
